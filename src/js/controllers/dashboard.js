@@ -1,5 +1,5 @@
 export default function dashboardController({ state, ui, api }) {
-    const data = state.mockdata;
+    const data = state.patient || state.mockData;
     if (!data) return; // caller should navigate to upload
 
     document.getElementById('dash-name').textContent = data.name;

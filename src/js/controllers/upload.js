@@ -3,8 +3,16 @@ export default function uploadController({ api, ui }) {
     const fileInput = document.getElementById('file-input');
 
     const handleFile = (file) => {
-        if (!file || file.type !== 'application/pdf') {
-            ui.showToast('Please upload a valid PDF file.');
+        if (!file) {
+            ui.showToast('Please select a file.');
+            return;
+        }
+        const validTypes = ['application/pdf', 'text/plain'];
+        const validExtensions = ['.pdf', '.txt'];
+        const fileExtension = file.name.substring(file.name.lastIndexOf('.')).toLowerCase();
+        
+        if (!validTypes.includes(file.type) && !validExtensions.includes(fileExtension)) {
+            ui.showToast('Please upload a valid PDF or TXT file.');
             return;
         }
         api.uploadFile(file);

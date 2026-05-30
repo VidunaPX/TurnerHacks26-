@@ -1,9 +1,10 @@
 import uploadController from './controllers/upload.js';
 import dashboardController from './controllers/dashboard.js';
+import recordsController from './controllers/records.js';
 import emergencyController from './controllers/emergency.js';
 import qrController from './controllers/qr.js';
 
-const UPLOAD_API_URL = 'https://example.com/api/upload'; // Replace with your real API endpoint
+const UPLOAD_API_URL = 'http://localhost:5000/api/upload';
 
 // --- STATE ---
 export const state = {
@@ -26,7 +27,15 @@ export const state = {
         logs: [
             { id: 1, date: "2023-11-12", metric: "Blood Sugar", value: "110 mg/dL" },
             { id: 2, date: "2023-11-11", metric: "Blood Sugar", value: "125 mg/dL" }
-        ]
+        ],
+        weight: "165 lbs",
+        height: "5'7",
+        insurance: "HealthPlus Gold",
+        primaryPhysician: "Dr. Emily Chen",
+        date_of_birth: "1989-07-02",
+
+
+
     }
 };
 
@@ -217,6 +226,7 @@ const router = {
         if (viewEl) {
             viewEl.classList.add('active');
             if (route === 'dashboard') dashboardController({ state, ui, api });
+            if (route === 'records') recordsController({ state });
             if (route === 'qr') qrController({ window });
             if (route === 'upload') uploadController({ api, ui });
         }
